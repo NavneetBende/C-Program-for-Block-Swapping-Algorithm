@@ -1,0 +1,53 @@
+#include<stdio.h>
+
+void swap(int arr[], int fi, int si, int d);
+ 
+void leftRotate(int arr[], int d, int n)
+{
+    int i, j;
+    if(d == 0 || d == n)
+        return;
+  
+    if(d > n)
+        d = d % n;
+    
+    i = d;
+    j = n - d;
+    
+    while (i != j){
+        if(i < j) {
+            swap(arr, d-i, d+j-i, i);
+            j -= i;
+        }
+        else {
+            swap(arr, d-i, d, j);
+            i -= j;
+        }
+    }
+  
+    swap(arr, d-i, d, i);
+}
+ 
+
+void swap(int arr[], int fi, int si, int d)
+{
+   int i, temp;
+   for(i = 0; i<d; i++)  
+   {
+     temp = arr[fi + i];
+     arr[fi + i] = arr[si + i];
+     arr[si + i] = temp;
+   }    
+}    
+ 
+/* Driver program to test above functions */
+int main()
+{
+   int arr[] = {10, 20, 30, 40, 50, 60, 70};
+   leftRotate(arr, 2, 7);
+   
+   for(int i = 0; i < 7; i++)
+    printf("%d ", arr[i]);
+   
+   return 0;
+}   
